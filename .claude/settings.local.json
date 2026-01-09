@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(java:*)",
+      "Bash(docker build:*)",
+      "Bash(docker run:*)",
+      "Bash(mvn clean package:*)"
+    ]
+  }
+}
