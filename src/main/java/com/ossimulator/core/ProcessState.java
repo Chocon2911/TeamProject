@@ -4,8 +4,8 @@ public enum ProcessState {
     NEW,
     READY,
     RUNNING,
-    BLOCKED,
-    SUSPENDED_READY,
-    SUSPENDED_BLOCKED,
+    WAITING,
+    SWAPPED_READY,
+    SWAPPED_WAITING,
     TERMINATED
 }

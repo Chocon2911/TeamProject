@@ -16,6 +16,7 @@ public class Process {
 
     private int memoryRequired;
     private boolean inMainMemory;
+    private int programCounter;
 
     public Process(int pid, String name, int burstTime, int priority) {
         this.pid = pid;
@@ -27,6 +28,7 @@ public class Process {
         this.arrivalTime = System.currentTimeMillis();
         this.memoryRequired = 100;
         this.inMainMemory = false;
+        this.programCounter = 0;
     }
 
     public void admit() {
@@ -52,12 +54,12 @@ public class Process {
 
     public void block() {
         if (state == ProcessState.RUNNING) {
-            state = ProcessState.BLOCKED;
+            state = ProcessState.WAITING;
         }
     }
 
     public void unblock() {
-        if (state == ProcessState.BLOCKED) {
+        if (state == ProcessState.WAITING) {
             state = ProcessState.READY;
         }
     }
@@ -69,18 +71,18 @@ public class Process {
 
     public void swapOut() {
         if (state == ProcessState.READY) {
-            state = ProcessState.SUSPENDED_READY;
-        } else if (state == ProcessState.BLOCKED) {
-            state = ProcessState.SUSPENDED_BLOCKED;
+            state = ProcessState.SWAPPED_READY;
+        } else if (state == ProcessState.WAITING) {
+            state = ProcessState.SWAPPED_WAITING;
         }
         inMainMemory = false;
     }
 
     public void swapIn() {
-        if (state == ProcessState.SUSPENDED_READY) {
+        if (state == ProcessState.SWAPPED_READY) {
             state = ProcessState.READY;
-        } else if (state == ProcessState.SUSPENDED_BLOCKED) {
-            state = ProcessState.BLOCKED;
+        } else if (state == ProcessState.SWAPPED_WAITING) {
+            state = ProcessState.WAITING;
         }
         inMainMemory = true;
     }
@@ -88,6 +90,7 @@ public class Process {
     public int execute(int timeSlice) {
         int actualTime = Math.min(timeSlice, remainingTime);
         remainingTime -= actualTime;
+        programCounter += actualTime * 10; // Simulate 10 instructions per ms
         return actualTime;
     }
 
@@ -133,6 +136,10 @@ public class Process {
 
     public void setInMainMemory(boolean inMainMemory) {
         this.inMainMemory = inMainMemory;
+    }
+
+    public int getProgramCounter() {
+        return programCounter;
     }
 
     public long getTurnaroundTime() {

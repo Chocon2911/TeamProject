@@ -42,6 +42,7 @@ public class ProcessControlBlock {
     public int getPriority() { return priority; }
     public void setPriority(int priority) { this.priority = priority; }
     public long getCpuTimeUsed() { return cpuTimeUsed; }
+    public long getLastScheduledTime() { return lastScheduledTime; }
     public int getProgramCounter() { return programCounter; }
     public int[] getRegisters() { return registers; }
     public int getStackPointer() { return stackPointer; }

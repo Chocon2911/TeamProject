@@ -25,11 +25,11 @@ public class Main {
         // Create some processes with different priorities
         // Higher number = Higher priority (runs first)
         System.out.println("=== Creating Processes ===\n");
-        kernel.createProcess("VSCode",      8, 7);  // Highest priority (4★)
-        kernel.createProcess("Chrome",     10, 5);  // High priority (3★)
-        kernel.createProcess("Terminal",    4, 4);  // High priority (3★)
-        kernel.createProcess("Spotify",     6, 2);  // Medium priority (2★)
-        kernel.createProcess("Calculator",  2, 1);  // Lowest priority (1★)
+        kernel.createProcess("VSCode", 8, 7); // Prio 7
+        kernel.createProcess("Chrome", 10, 7); // Prio 7 (Same as VSCode -> RR)
+        kernel.createProcess("Terminal", 4, 4); // Prio 4
+        kernel.createProcess("Spotify", 6, 4); // Prio 4 (Same as Terminal -> RR)
+        kernel.createProcess("Calculator", 2, 1); // Lowest priority
 
         System.out.println("\n=== Demo Options ===");
         System.out.println("1. Single-threaded simulation");
