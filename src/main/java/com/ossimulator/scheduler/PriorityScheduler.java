@@ -46,7 +46,8 @@ public class PriorityScheduler implements Scheduler {
     public Optional<Process> selectNext() {
         lock.lock();
         try {
-            for (int priority = 1; priority <= MAX_PRIORITY_LEVELS; priority++) {
+            // Higher priority number = higher priority (runs first)
+            for (int priority = MAX_PRIORITY_LEVELS; priority >= 1; priority--) {
                 Queue<Process> queue = priorityQueues.get(priority);
                 if (!queue.isEmpty()) {
                     return Optional.of(queue.poll());
@@ -62,7 +63,8 @@ public class PriorityScheduler implements Scheduler {
     public void requeue(Process process) {
         lock.lock();
         try {
-            if (!process.isCompleted() && process.getState() == ProcessState.READY) {
+            if (!process.isCompleted() &&
+                    (process.getState() == ProcessState.READY || process.getState() == ProcessState.SWAPPED_READY)) {
                 int priority = process.getPriority();
                 priorityQueues.get(priority).offer(process);
             }
