@@ -10,7 +10,6 @@ import java.util.Map;
 public class Dispatcher {
     private final Map<Integer, ProcessControlBlock> pcbTable;
 
-    private int programCounter;
     private int[] registers;
     private int stackPointer;
 
@@ -29,17 +28,17 @@ public class Dispatcher {
         pcbTable.put(process.getPid(), pcb);
     }
 
-    public void dispatch(Process nextProcess, Process previousProcess) {
+    public void dispatch(Process nextProcess, Process previousProcess, int coreId) {
         long startTime = System.nanoTime();
 
         if (previousProcess != null && previousProcess.getState() == ProcessState.RUNNING) {
-            saveContext(previousProcess);
+            saveContext(previousProcess, coreId);
             previousProcess.preempt();
         }
 
         contextSwitch(nextProcess);
 
-        restoreContext(nextProcess);
+        restoreContext(nextProcess, coreId);
         nextProcess.dispatch();
 
         contextSwitchCount++;
@@ -47,15 +46,17 @@ public class Dispatcher {
         long endTime = System.nanoTime();
         totalDispatchTime += (endTime - startTime);
 
-        printDispatchInfo(previousProcess, nextProcess);
+        printDispatchInfo(previousProcess, nextProcess, coreId);
     }
 
-    public void saveContext(Process process) {
+    public void saveContext(Process process, int coreId) {
         ProcessControlBlock pcb = pcbTable.get(process.getPid());
         if (pcb != null) {
-            pcb.saveContext(programCounter, registers, stackPointer);
-            System.out.printf("  [Dispatcher] Saved context for P%d (PC=%d)%n",
-                    process.getPid(), programCounter);
+            // Save current process state (Program Counter, registers, etc.)
+            int currentPC = process.getProgramCounter();
+            pcb.saveContext(currentPC, registers, stackPointer);
+            System.out.printf("  [Dispatcher][Core %d] Saved context for P%d (PC=%d)%n",
+                    coreId, process.getPid(), currentPC);
         }
     }
 
@@ -67,20 +68,20 @@ public class Dispatcher {
         }
     }
 
-    private void restoreContext(Process process) {
+    private void restoreContext(Process process, int coreId) {
         ProcessControlBlock pcb = pcbTable.get(process.getPid());
         if (pcb != null) {
             int[] state = pcb.restoreContext();
-            programCounter = state[0];
-            stackPointer = state[1];
-            System.out.printf("  [Dispatcher] Restored context for P%d (PC=%d)%n",
-                    process.getPid(), programCounter);
+            // Load process state to CPU
+            int restoredPC = state[0];
+            System.out.printf("  [Dispatcher][Core %d] Restored context for P%d (PC=%d)%n",
+                    coreId, process.getPid(), restoredPC);
         }
     }
 
-    private void printDispatchInfo(Process prev, Process next) {
+    private void printDispatchInfo(Process prev, Process next, int coreId) {
         System.out.println("------------------------------------------");
-        System.out.printf("  DISPATCH #%d%n", contextSwitchCount);
+        System.out.printf("  DISPATCH #%d [Core %d]%n", contextSwitchCount, coreId);
         if (prev != null) {
             System.out.printf("  Previous: P%d (%s) -> %s%n",
                     prev.getPid(), prev.getName(), prev.getState());
@@ -95,7 +96,8 @@ public class Dispatcher {
     }
 
     public double getAverageDispatchTime() {
-        if (contextSwitchCount == 0) return 0;
+        if (contextSwitchCount == 0)
+            return 0;
         return (double) totalDispatchTime / contextSwitchCount / 1_000_000;
     }
 }
