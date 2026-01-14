@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Dispatcher {
-    private Process currentProcess;
     private final Map<Integer, ProcessControlBlock> pcbTable;
 
     private int programCounter;
@@ -30,14 +29,12 @@ public class Dispatcher {
         pcbTable.put(process.getPid(), pcb);
     }
 
-    public Process dispatch(Process nextProcess) {
+    public void dispatch(Process nextProcess, Process previousProcess) {
         long startTime = System.nanoTime();
 
-        Process previousProcess = currentProcess;
-
-        if (currentProcess != null && currentProcess.getState() == ProcessState.RUNNING) {
-            saveContext(currentProcess);
-            currentProcess.preempt();
+        if (previousProcess != null && previousProcess.getState() == ProcessState.RUNNING) {
+            saveContext(previousProcess);
+            previousProcess.preempt();
         }
 
         contextSwitch(nextProcess);
@@ -45,18 +42,15 @@ public class Dispatcher {
         restoreContext(nextProcess);
         nextProcess.dispatch();
 
-        currentProcess = nextProcess;
         contextSwitchCount++;
 
         long endTime = System.nanoTime();
         totalDispatchTime += (endTime - startTime);
 
         printDispatchInfo(previousProcess, nextProcess);
-
-        return previousProcess;
     }
 
-    private void saveContext(Process process) {
+    public void saveContext(Process process) {
         ProcessControlBlock pcb = pcbTable.get(process.getPid());
         if (pcb != null) {
             pcb.saveContext(programCounter, registers, stackPointer);
@@ -94,10 +88,6 @@ public class Dispatcher {
         System.out.printf("  Current:  P%d (%s) -> RUNNING%n",
                 next.getPid(), next.getName());
         System.out.println("------------------------------------------");
-    }
-
-    public Process getCurrentProcess() {
-        return currentProcess;
     }
 
     public int getContextSwitchCount() {
