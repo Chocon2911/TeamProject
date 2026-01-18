@@ -1,12 +1,14 @@
 package com.ossimulator.thread;
 
-import com.ossimulator.kernel.Kernel;
+import com.ossimulator.manager.kernel.Kernel;
 
 public class MonitorThread extends Thread {
+    //==========================================Variable==========================================
     private final Kernel kernel;
     private volatile boolean running;
     private final int intervalMs;
 
+    //========================================Constructor=========================================
     public MonitorThread(Kernel kernel, int intervalMs) {
         super("MonitorThread");
         this.kernel = kernel;
@@ -14,6 +16,7 @@ public class MonitorThread extends Thread {
         this.running = true;
     }
 
+    //===========================================Method===========================================
     @Override
     public void run() {
         System.out.println("[MonitorThread] Started - Thread ID: " + Thread.currentThread().getId());

@@ -407,6 +407,7 @@ package com.ossimulator.scheduler;
 
 import com.ossimulator.core.Process;
 import com.ossimulator.core.ProcessState;
+import com.ossimulator.manager.scheduler.Scheduler;
 
 import java.util.LinkedList;
 import java.util.Optional;
@@ -508,6 +509,7 @@ package com.ossimulator.scheduler;
 
 import com.ossimulator.core.Process;
 import com.ossimulator.core.ProcessState;
+import com.ossimulator.manager.scheduler.Scheduler;
 
 import java.util.*;
 import java.util.concurrent.locks.ReentrantLock;
@@ -820,6 +822,7 @@ public class Dispatcher {
 package com.ossimulator.memory;
 
 import com.ossimulator.core.Process;
+import com.ossimulator.manager.memory.SwapSpace;
 
 import java.util.*;
 import java.util.concurrent.locks.ReentrantLock;
@@ -1050,10 +1053,10 @@ package com.ossimulator.kernel;
 
 import com.ossimulator.core.Process;
 import com.ossimulator.core.ProcessState;
-import com.ossimulator.dispatcher.Dispatcher;
-import com.ossimulator.memory.MemoryManager;
-import com.ossimulator.scheduler.PriorityScheduler;
-import com.ossimulator.scheduler.Scheduler;
+import com.ossimulator.manager.dispatcher.Dispatcher;
+import com.ossimulator.manager.memory.MemoryManager;
+import com.ossimulator.manager.scheduler.PriorityScheduler;
+import com.ossimulator.manager.scheduler.Scheduler;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -1207,10 +1210,21 @@ public class Kernel {
     }
 
     // Getters
-    public Scheduler getScheduler() { return scheduler; }
-    public Dispatcher getDispatcher() { return dispatcher; }
-    public MemoryManager getMemoryManager() { return memoryManager; }
-    public Map<Integer, Process> getProcessTable() { return processTable; }
+    public Scheduler getScheduler() {
+        return scheduler;
+    }
+
+    public Dispatcher getDispatcher() {
+        return dispatcher;
+    }
+
+    public MemoryManager getMemoryManager() {
+        return memoryManager;
+    }
+
+    public Map<Integer, Process> getProcessTable() {
+        return processTable;
+    }
 }
 ```
 
@@ -1223,17 +1237,15 @@ public class Kernel {
 ```java
 package com.ossimulator.thread;
 
-import com.ossimulator.kernel.Kernel;
-
 /**
  * Thread 1: Chạy scheduler loop
  */
 public class SchedulerThread extends Thread {
 
-    private final Kernel kernel;
+    private final com.ossimulator.manager.kernel.Kernel kernel;
     private volatile boolean running;
 
-    public SchedulerThread(Kernel kernel) {
+    public SchedulerThread(com.ossimulator.manager.kernel.Kernel kernel) {
         super("SchedulerThread");
         this.kernel = kernel;
         this.running = true;
@@ -1268,7 +1280,7 @@ public class SchedulerThread extends Thread {
 ```java
 package com.ossimulator.thread;
 
-import com.ossimulator.kernel.Kernel;
+import com.ossimulator.manager.kernel.Kernel;
 
 /**
  * Thread 2: Monitor và in trạng thái hệ thống
@@ -1333,7 +1345,7 @@ public class MonitorThread extends Thread {
 package com.ossimulator;
 
 import com.ossimulator.core.Process;
-import com.ossimulator.kernel.Kernel;
+import com.ossimulator.manager.kernel.Kernel;
 import com.ossimulator.thread.MonitorThread;
 import com.ossimulator.thread.SchedulerThread;
 
@@ -1358,11 +1370,11 @@ public class Main {
 
         // Create some processes
         System.out.println("=== Creating Processes ===\n");
-        kernel.createProcess("Chrome",   10, 2);
-        kernel.createProcess("VSCode",    8, 1);  // Highest priority
-        kernel.createProcess("Spotify",   6, 3);
-        kernel.createProcess("Terminal",  4, 2);
-        kernel.createProcess("Calculator",2, 4);  // Lowest priority
+        kernel.createProcess("Chrome", 10, 2);
+        kernel.createProcess("VSCode", 8, 1);  // Highest priority
+        kernel.createProcess("Spotify", 6, 3);
+        kernel.createProcess("Terminal", 4, 2);
+        kernel.createProcess("Calculator", 2, 4);  // Lowest priority
 
         System.out.println("\n=== Starting Multi-threaded Demo ===\n");
 
@@ -1373,7 +1385,7 @@ public class Main {
         runMultiThreadDemo(kernel);
     }
 
-    private static void runMultiThreadDemo(Kernel kernel) {
+    private static void runMultiThreadDemo(com.ossimulator.manager.kernel.Kernel kernel) {
         // Thread 1: Scheduler
         SchedulerThread schedulerThread = new SchedulerThread(kernel);
 

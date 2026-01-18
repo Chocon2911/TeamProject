@@ -4,7 +4,17 @@
       "Bash(java:*)",
       "Bash(docker build:*)",
       "Bash(docker run:*)",
-      "Bash(mvn clean package:*)"
+      "Bash(mvn clean package:*)",
+      "Bash(mvn compile:*)",
+      "Bash(xargs:*)",
+      "Bash(cmd.exe /c \"cd /d \"\"C:\\\\Users\\\\Admin\\\\OneDrive - Hanoi University of Science and Technology\\\\New folder\\\\year 4-1\\\\CS4448\\\\TeamProject\"\" && if not exist out mkdir out && dir /s /b src\\\\main\\\\java\\\\*.java > sources.txt && javac -d out -sourcepath src\\\\main\\\\java @sources.txt && del sources.txt && echo BUILD SUCCESS\")",
+      "Bash(powershell.exe -Command \"cd ''C:\\\\Users\\\\Admin\\\\OneDrive - Hanoi University of Science and Technology\\\\New folder\\\\year 4-1\\\\CS4448\\\\TeamProject''; if \\(!\\(Test-Path out\\)\\) { mkdir out }; $files = Get-ChildItem -Path src\\\\main\\\\java -Recurse -Filter *.java | ForEach-Object { $_.FullName }; $files | Out-File -FilePath sources.txt -Encoding ASCII; javac -d out -sourcepath src\\\\main\\\\java ''@sources.txt''; Remove-Item sources.txt; Write-Host ''BUILD SUCCESS''\")",
+      "Bash(powershell.exe -Command '\nSet-Location \"\"C:\\\\Users\\\\Admin\\\\OneDrive - Hanoi University of Science and Technology\\\\New folder\\\\year 4-1\\\\CS4448\\\\TeamProject\"\"\nif \\(-not \\(Test-Path out\\)\\) { New-Item -ItemType Directory -Path out | Out-Null }\n$files = Get-ChildItem -Path \"\"src\\\\main\\\\java\"\" -Recurse -Filter \"\"*.java\"\" | ForEach-Object { \"\"`\"\"$\\($_.FullName\\)`\"\"\"\" }\n$fileList = $files -join \"\" \"\"\n$cmd = \"\"javac -d `\"\"out`\"\" -sourcepath `\"\"src\\\\main\\\\java`\"\" $fileList\"\"\nInvoke-Expression $cmd\nif \\($LASTEXITCODE -eq 0\\) { Write-Host \"\"BUILD SUCCESS\"\" } else { Write-Host \"\"BUILD FAILED\"\" }\n')",
+      "Bash(powershell.exe -Command '\nSet-Location \"\"C:\\\\Users\\\\Admin\\\\OneDrive - Hanoi University of Science and Technology\\\\New folder\\\\year 4-1\\\\CS4448\\\\TeamProject\"\"\nif \\(Test-Path out\\) { Remove-Item -Recurse -Force out }\nNew-Item -ItemType Directory -Path out | Out-Null\n$files = Get-ChildItem -Path \"\"src\\\\main\\\\java\"\" -Recurse -Filter \"\"*.java\"\" | ForEach-Object { \"\"`\"\"$\\($_.FullName\\)`\"\"\"\" }\n$fileList = $files -join \"\" \"\"\n$cmd = \"\"javac -d `\"\"out`\"\" -sourcepath `\"\"src\\\\main\\\\java`\"\" $fileList\"\"\nInvoke-Expression $cmd\nif \\($LASTEXITCODE -eq 0\\) { Write-Host \"\"BUILD SUCCESS\"\" } else { Write-Host \"\"BUILD FAILED\"\" }\n')",
+      "Bash(cmd.exe /c:*)",
+      "Bash(powershell.exe -Command \"cd ''C:\\\\Users\\\\Admin\\\\Desktop''; pandoc report.md -s -o SOLARIS_Process_Execution_Report.html\")",
+      "Bash(powershell.exe -Command \"wkhtmltopdf --version\")",
+      "Bash(powershell.exe -Command \"cd ''C:\\\\Users\\\\Admin\\\\Desktop''; pandoc class_diagram.md -o Class_Diagram.docx\")"
     ]
   }
 }

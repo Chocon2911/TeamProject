@@ -1,0 +1,44 @@
+[11:07:32.326] [LOGGER      ] File logging enabled: logs/simulation.log
+[11:07:32.337] [Kernel      ] Kernel initialized - timeQuantum=2ms, maxMemory=3
+[11:07:32.340] [Kernel      ] Created process: Process[pid=1, name=Chrome, state=READY, priority=2, remaining=10]
+[11:07:32.341] [Kernel      ] Created process: Process[pid=2, name=VSCode, state=READY, priority=1, remaining=8]
+[11:07:32.342] [Kernel      ] Created process: Process[pid=3, name=Spotify, state=READY, priority=3, remaining=6]
+[11:07:32.342] [Kernel      ] Created process: Process[pid=4, name=Terminal, state=READY, priority=2, remaining=4]
+[11:07:32.345] [Kernel      ] Created process: Process[pid=5, name=Calculator, state=READY, priority=4, remaining=2]
+[11:07:32.359] [Kernel      ] P2 executed for 2ms (remaining: 6ms)
+[11:07:32.567] [Kernel      ] P2 executed for 2ms (remaining: 4ms)
+[11:07:32.784] [Kernel      ] P2 executed for 2ms (remaining: 2ms)
+[11:07:33.003] [Kernel      ] P2 executed for 2ms (remaining: 0ms)
+[11:07:33.003] [Kernel      ] P2 TERMINATED
+[11:07:33.216] [Kernel      ] P1 executed for 2ms (remaining: 8ms)
+[11:07:33.431] [Kernel      ] P4 executed for 2ms (remaining: 2ms)
+[11:07:33.647] [Kernel      ] P1 executed for 2ms (remaining: 6ms)
+[11:07:33.859] [Kernel      ] P4 executed for 2ms (remaining: 0ms)
+[11:07:33.860] [Kernel      ] P4 TERMINATED
+[11:07:34.074] [Kernel      ] P1 executed for 2ms (remaining: 4ms)
+[11:07:34.291] [Kernel      ] P1 executed for 2ms (remaining: 2ms)
+[11:07:34.507] [Kernel      ] P1 executed for 2ms (remaining: 0ms)
+[11:07:34.507] [Kernel      ] P1 TERMINATED
+[11:07:34.710] [Kernel      ] P3 executed for 2ms (remaining: 4ms)
+[11:07:34.923] [Kernel      ] P3 executed for 2ms (remaining: 2ms)
+[11:07:35.139] [Kernel      ] P3 executed for 2ms (remaining: 0ms)
+[11:07:35.139] [Kernel      ] P3 TERMINATED
+[11:07:35.353] [Kernel      ] P5 executed for 2ms (remaining: 0ms)
+[11:07:35.353] [Kernel      ] P5 TERMINATED
+────────────────────────────────────────────────────────────
+[11:07:35.610] [Kernel      ] SIMULATION COMPLETE
+────────────────────────────────────────────────────────────
+[11:07:35.610] [Kernel      ] Total simulation time: 30ms
+[11:07:35.610] [Kernel      ] Context switches: 15
+[11:07:35.611] [Kernel      ] Avg dispatch time: 2.330ms
+[11:07:35.613] [Kernel      ] Process Statistics:
+[11:07:35.613] [Stats       ] +-----+------------+------------+-------------+--------------+
+[11:07:35.613] [Stats       ] | PID | Name       | State      | Turnaround  | Waiting Time |
+[11:07:35.613] [Stats       ] +-----+------------+------------+-------------+--------------+
+[11:07:35.613] [Stats       ] |   1 | Chrome     | TERMINATED |     2169ms  |      2159ms  |
+[11:07:35.615] [Stats       ] |   2 | VSCode     | TERMINATED |      662ms  |       654ms  |
+[11:07:35.615] [Stats       ] |   3 | Spotify    | TERMINATED |     2798ms  |      2792ms  |
+[11:07:35.615] [Stats       ] |   4 | Terminal   | TERMINATED |     1518ms  |      1514ms  |
+[11:07:35.615] [Stats       ] |   5 | Calculator | TERMINATED |     3010ms  |      3008ms  |
+[11:07:35.615] [Stats       ] +-----+------------+------------+-------------+--------------+
+[11:07:35.615] [LOGGER      ] Closing log file

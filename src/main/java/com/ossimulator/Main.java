@@ -1,17 +1,66 @@
 package com.ossimulator;
 
-import com.ossimulator.kernel.Kernel;
+import com.ossimulator.manager.kernel.Kernel;
 import com.ossimulator.thread.MonitorThread;
 import com.ossimulator.thread.SchedulerThread;
+import com.ossimulator.gui.SimulatorApp;
+
+import javax.swing.SwingUtilities;
 
 public class Main {
 
     public static void main(String[] args) {
+        // Check command-line arguments for mode selection
+        boolean guiMode = true;  // Default to GUI mode
+
+        for (String arg : args) {
+            if (arg.equalsIgnoreCase("--console") || arg.equalsIgnoreCase("-c")) {
+                guiMode = false;
+            } else if (arg.equalsIgnoreCase("--gui") || arg.equalsIgnoreCase("-g")) {
+                guiMode = true;
+            } else if (arg.equalsIgnoreCase("--help") || arg.equalsIgnoreCase("-h")) {
+                printHelp();
+                return;
+            }
+        }
+
+        if (guiMode) {
+            // Launch GUI application
+            SwingUtilities.invokeLater(() -> {
+                SimulatorApp app = new SimulatorApp();
+                app.setVisible(true);
+            });
+        } else {
+            // Run console mode
+            runConsoleMode();
+        }
+    }
+
+    private static void printHelp() {
+        System.out.println("+===========================================================+");
+        System.out.println("|              OS KERNEL SIMULATOR - Help                   |");
+        System.out.println("+===========================================================+");
+        System.out.println();
+        System.out.println("Usage: java -jar ossimulator.jar [options]");
+        System.out.println();
+        System.out.println("Options:");
+        System.out.println("  --gui, -g      Launch GUI application (default)");
+        System.out.println("  --console, -c  Run in console mode");
+        System.out.println("  --help, -h     Show this help message");
+        System.out.println();
+        System.out.println("Examples:");
+        System.out.println("  java -jar ossimulator.jar          # Launch GUI");
+        System.out.println("  java -jar ossimulator.jar --gui    # Launch GUI");
+        System.out.println("  java -jar ossimulator.jar --console # Run console demo");
+        System.out.println();
+    }
+
+    private static void runConsoleMode() {
         System.out.println("+===========================================================+");
         System.out.println("|              OS KERNEL SIMULATOR                          |");
         System.out.println("|    Round Robin + Priority Scheduling with Swap            |");
         System.out.println("|                                                           |");
-        System.out.println("|    Course: CS4448 - Operating Systems                     |");
+        System.out.println("|         Course: CS4448 - Operating Systems                |");
         System.out.println("+===========================================================+");
         System.out.println();
 
@@ -21,6 +70,9 @@ public class Main {
 
         // Create kernel
         Kernel kernel = new Kernel(timeQuantum, maxMemory);
+
+        // Enable file logging
+        kernel.enableFileLogging("logs/simulation.log");
 
         // Create some processes with different priorities
         System.out.println("=== Creating Processes ===\n");
@@ -81,6 +133,10 @@ public class Main {
         // Print final statistics
         System.out.println("\n[Main] Both threads have finished.");
         kernel.printStatistics();
+
+        // Close logger
+        kernel.closeLogger();
+        System.out.println("\n[Main] Log file saved to: logs/simulation.log");
 
         System.out.println("\n+===========================================================+");
         System.out.println("|                    DEMO COMPLETE                          |");
