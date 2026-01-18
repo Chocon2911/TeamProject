@@ -1,7 +1,6 @@
 package com.ossimulator.scheduler;
 
 import com.ossimulator.core.Process;
-import com.ossimulator.core.ProcessState;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
@@ -44,19 +43,20 @@ class PrioritySchedulerTest {
     @Test
     @DisplayName("SelectNext trả về process có priority cao nhất trước")
     void testSelectByPriority() {
-        Process pLow = new Process(1, "Low", 10, 3);
-        Process pHigh = new Process(2, "High", 10, 1);
-        Process pMedium = new Process(3, "Medium", 10, 2);
+        // Higher number = Higher priority (runs first)
+        Process pLow = new Process(1, "Low", 10, 1);     // Priority 1 (lowest)
+        Process pHigh = new Process(2, "High", 10, 3);   // Priority 3 (highest)
+        Process pMedium = new Process(3, "Medium", 10, 2); // Priority 2
 
         // Thêm theo thứ tự ngẫu nhiên
-        scheduler.addProcess(pLow);    // Priority 3
-        scheduler.addProcess(pHigh);   // Priority 1 (cao nhất)
+        scheduler.addProcess(pLow);    // Priority 1 (thấp nhất)
+        scheduler.addProcess(pHigh);   // Priority 3 (cao nhất)
         scheduler.addProcess(pMedium); // Priority 2
 
-        // Lấy ra theo priority
-        assertEquals(pHigh, scheduler.selectNext().orElse(null));   // Priority 1
+        // Lấy ra theo priority (cao nhất trước)
+        assertEquals(pHigh, scheduler.selectNext().orElse(null));   // Priority 3
         assertEquals(pMedium, scheduler.selectNext().orElse(null)); // Priority 2
-        assertEquals(pLow, scheduler.selectNext().orElse(null));    // Priority 3
+        assertEquals(pLow, scheduler.selectNext().orElse(null));    // Priority 1
     }
 
     @Test
@@ -79,8 +79,9 @@ class PrioritySchedulerTest {
     @Test
     @DisplayName("High priority preempt low priority")
     void testHighPriorityFirst() {
-        Process pLow = new Process(1, "Low", 10, 5);
-        Process pHigh = new Process(2, "High", 10, 1);
+        // Higher number = Higher priority
+        Process pLow = new Process(1, "Low", 10, 1);   // Priority 1 (lowest)
+        Process pHigh = new Process(2, "High", 10, 5); // Priority 5 (highest)
 
         scheduler.addProcess(pLow);
         scheduler.addProcess(pHigh);
@@ -93,8 +94,9 @@ class PrioritySchedulerTest {
     @Test
     @DisplayName("Requeue giữ nguyên priority")
     void testRequeueMaintainsPriority() {
-        Process pHigh = new Process(1, "High", 10, 1);
-        Process pLow = new Process(2, "Low", 10, 3);
+        // Higher number = Higher priority
+        Process pHigh = new Process(1, "High", 10, 3); // Priority 3 (highest)
+        Process pLow = new Process(2, "Low", 10, 1);   // Priority 1 (lowest)
 
         scheduler.addProcess(pHigh);
         scheduler.addProcess(pLow);
@@ -114,14 +116,15 @@ class PrioritySchedulerTest {
     @Test
     @DisplayName("ChangePriority di chuyển process sang queue mới")
     void testChangePriority() {
-        Process p1 = new Process(1, "P1", 10, 3);
-        Process p2 = new Process(2, "P2", 10, 3);
+        // Both start at priority 2
+        Process p1 = new Process(1, "P1", 10, 2);
+        Process p2 = new Process(2, "P2", 10, 2);
 
         scheduler.addProcess(p1);
         scheduler.addProcess(p2);
 
-        // Thay đổi p2 lên priority cao hơn
-        scheduler.changePriority(p2, 1);
+        // Thay đổi p2 lên priority cao hơn (higher number = higher priority)
+        scheduler.changePriority(p2, 5);
 
         // p2 được chọn trước vì priority cao hơn
         assertEquals(p2, scheduler.selectNext().orElse(null));
@@ -131,14 +134,15 @@ class PrioritySchedulerTest {
     @Test
     @DisplayName("Priority bị giới hạn trong khoảng 1-10")
     void testPriorityBounds() {
-        Process pZero = new Process(1, "Zero", 10, 0);  // Sẽ thành 1
-        Process pHigh = new Process(2, "High", 10, 15); // Sẽ thành 10
+        // Higher number = Higher priority
+        Process pZero = new Process(1, "Zero", 10, 0);  // Sẽ clamp thành 1 (lowest)
+        Process pHigh = new Process(2, "High", 10, 15); // Sẽ clamp thành 10 (highest)
 
         scheduler.addProcess(pZero);
         scheduler.addProcess(pHigh);
 
-        // pZero (clamped to 1) có priority cao hơn pHigh (clamped to 10)
-        assertEquals(pZero, scheduler.selectNext().orElse(null));
+        // pHigh (clamped to 10) có priority cao hơn pZero (clamped to 1)
+        assertEquals(pHigh, scheduler.selectNext().orElse(null));
     }
 
     @Test
@@ -151,22 +155,23 @@ class PrioritySchedulerTest {
     @Test
     @DisplayName("Mixed priority scheduling simulation")
     void testMixedPrioritySimulation() {
-        Process p1 = new Process(1, "Chrome", 6, 2);
-        Process p2 = new Process(2, "VSCode", 4, 1);   // Highest
-        Process p3 = new Process(3, "Spotify", 8, 3);
+        // Higher number = Higher priority
+        Process p1 = new Process(1, "Chrome", 6, 2);    // Medium priority
+        Process p2 = new Process(2, "VSCode", 4, 3);    // Highest priority
+        Process p3 = new Process(3, "Spotify", 8, 1);   // Lowest priority
 
         scheduler.addProcess(p1);
         scheduler.addProcess(p2);
         scheduler.addProcess(p3);
 
-        // First round: VSCode (priority 1)
+        // First round: VSCode (priority 3 = highest)
         Process current = scheduler.selectNext().orElse(null);
         assertEquals("VSCode", current.getName());
         current.execute(2);
         current.preempt();
         scheduler.requeue(current);
 
-        // VSCode vẫn được chọn (priority 1)
+        // VSCode vẫn được chọn (priority 3 cao nhất)
         current = scheduler.selectNext().orElse(null);
         assertEquals("VSCode", current.getName());
         current.execute(2);

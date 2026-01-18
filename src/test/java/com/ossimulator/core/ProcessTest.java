@@ -57,7 +57,7 @@ class ProcessTest {
         process.admit();
         process.dispatch();
         process.block();
-        assertEquals(ProcessState.BLOCKED, process.getState());
+        assertEquals(ProcessState.WAITING, process.getState());
     }
 
     @Test
@@ -84,7 +84,7 @@ class ProcessTest {
     void testSwapOutFromReady() {
         process.admit();
         process.swapOut();
-        assertEquals(ProcessState.SUSPENDED_READY, process.getState());
+        assertEquals(ProcessState.SWAPPED_READY, process.getState());
         assertFalse(process.isInMainMemory());
     }
 
@@ -95,11 +95,11 @@ class ProcessTest {
         process.dispatch();
         process.block();
         process.swapOut();
-        assertEquals(ProcessState.SUSPENDED_BLOCKED, process.getState());
+        assertEquals(ProcessState.SWAPPED_WAITING, process.getState());
     }
 
     @Test
-    @DisplayName("SwapIn: SUSPENDED_READY -> READY")
+    @DisplayName("SwapIn: SWAPPED_READY -> READY")
     void testSwapIn() {
         process.admit();
         process.swapOut();

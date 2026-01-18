@@ -1,8 +1,0 @@
-com\ossimulator\scheduler\PrioritySchedulerTest.class
-com\ossimulator\memory\SwapSpaceTest.class
-com\ossimulator\core\ProcessTest.class
-com\ossimulator\kernel\KernelTest.class
-com\ossimulator\scheduler\RoundRobinSchedulerTest.class
-com\ossimulator\core\ProcessStateTest.class
-com\ossimulator\memory\MemoryManagerTest.class
-com\ossimulator\dispatcher\DispatcherTest.class

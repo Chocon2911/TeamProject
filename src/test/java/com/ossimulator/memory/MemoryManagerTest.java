@@ -80,7 +80,7 @@ class MemoryManagerTest {
 
         assertEquals(3, memoryManager.getMemoryUsage());
         assertEquals(1, memoryManager.getSwapUsage());
-        assertTrue(memoryManager.isInSwap(1));   // p1 swapped
+        assertTrue(memoryManager.isInSwap(1)); // p1 swapped
         assertTrue(memoryManager.isInMemory(4)); // p4 loaded
     }
 
@@ -93,7 +93,7 @@ class MemoryManagerTest {
 
         memoryManager.swapOut(p);
 
-        assertEquals(ProcessState.SUSPENDED_READY, p.getState());
+        assertEquals(ProcessState.SWAPPED_READY, p.getState());
         assertFalse(p.isInMainMemory());
         assertTrue(memoryManager.isInSwap(1));
     }
@@ -138,7 +138,7 @@ class MemoryManagerTest {
         // Load p4 -> p2 should be swapped (oldest in LRU)
         memoryManager.loadToMemory(p4);
 
-        assertTrue(memoryManager.isInSwap(2));   // p2 swapped (oldest)
+        assertTrue(memoryManager.isInSwap(2)); // p2 swapped (oldest)
         assertTrue(memoryManager.isInMemory(1)); // p1 still in memory (recently accessed)
     }
 

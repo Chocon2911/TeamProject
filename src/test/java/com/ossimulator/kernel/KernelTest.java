@@ -84,8 +84,9 @@ class KernelTest {
     @Test
     @DisplayName("Priority scheduling: high priority first")
     void testPriorityOrder() {
-        Process pLow = kernel.createProcess("Low", 10, 5);
-        Process pHigh = kernel.createProcess("High", 10, 1);
+        // Higher number = Higher priority
+        kernel.createProcess("Low", 10, 1);   // Priority 1 (lowest)
+        Process pHigh = kernel.createProcess("High", 10, 5); // Priority 5 (highest)
 
         kernel.runCycle();
 
@@ -123,18 +124,19 @@ class KernelTest {
     @Test
     @DisplayName("Multiple processes với priority khác nhau")
     void testMultipleProcessesPriority() {
-        Process p1 = kernel.createProcess("Priority1", 6, 1);
-        Process p2 = kernel.createProcess("Priority2", 4, 2);
-        Process p3 = kernel.createProcess("Priority3", 2, 3);
+        // Higher number = Higher priority
+        Process p1 = kernel.createProcess("Priority3", 6, 3); // Highest priority (runs first)
+        kernel.createProcess("Priority2", 4, 2);
+        kernel.createProcess("Priority1", 2, 1); // Lowest priority
 
-        // Run until p1 completes (priority 1 runs first)
+        // Run until p1 completes (priority 3 = highest, runs first)
         while (p1.getState() != ProcessState.TERMINATED) {
             kernel.runCycle();
         }
 
-        // p1 should complete first
+        // p1 should complete first (highest priority)
         assertTrue(p1.isCompleted());
-        // p2 and p3 should still have remaining time (might have run some cycles)
+        // Other processes should still have remaining time (might have run some cycles)
     }
 
     @Test

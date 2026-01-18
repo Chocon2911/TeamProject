@@ -70,22 +70,34 @@ cd ../../../target/classes
 java com.ossimulator.Main
 ```
 
-### Option 3: Using IDE
+### Option 3: Run Visual Simulator
+
+```bash
+# Run the FXGL visualizer
+mvn exec:java -Pvisual
+```
+
+### Option 4: Using IDE
 
 1. Open project in IntelliJ IDEA / Eclipse / VS Code
 2. Import as Maven project
-3. Run `Main.java`
+3. Run `Main.java` for console or `VisualMain.java` for visualizer
 
 ## Features Demonstrated
 
-1. **Process States**: NEW → READY → RUNNING → WAITING → TERMINATED
-2. **Priority Scheduling**: Higher priority processes run first
+1. **Process States**: NEW → READY → RUNNING → BLOCKED → TERMINATED
+2. **Priority Scheduling**: Higher priority number = runs first (4★ > 3★ > 2★ > 1★)
 3. **Round Robin**: Equal time quantum for same priority level
 4. **Context Switching**: Save/restore CPU state when switching processes
 5. **Memory Management**: Swap out LRU processes when RAM is full
 6. **Multi-threading**: Two threads running concurrently:
    - SchedulerThread: Runs scheduling cycles
    - MonitorThread: Displays system status
+7. **Visual Simulator**: FXGL-based visualizer showing:
+   - Process spawning and queue animations
+   - Dual-core CPU with dispatch animations
+   - Pulsating CPU when executing
+   - Particle effects on termination
 
 ## Sample Output
 

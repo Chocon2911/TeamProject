@@ -21,15 +21,15 @@ class ProcessStateTest {
         assertNotNull(ProcessState.NEW);
         assertNotNull(ProcessState.READY);
         assertNotNull(ProcessState.RUNNING);
-        assertNotNull(ProcessState.BLOCKED);
+        assertNotNull(ProcessState.WAITING);
         assertNotNull(ProcessState.TERMINATED);
     }
 
     @Test
     @DisplayName("Các trạng thái suspended tồn tại")
     void testSuspendedStates() {
-        assertNotNull(ProcessState.SUSPENDED_READY);
-        assertNotNull(ProcessState.SUSPENDED_BLOCKED);
+        assertNotNull(ProcessState.SWAPPED_READY);
+        assertNotNull(ProcessState.SWAPPED_WAITING);
     }
 
     @Test
@@ -37,6 +37,6 @@ class ProcessStateTest {
     void testValueOf() {
         assertEquals(ProcessState.NEW, ProcessState.valueOf("NEW"));
         assertEquals(ProcessState.RUNNING, ProcessState.valueOf("RUNNING"));
-        assertEquals(ProcessState.SUSPENDED_READY, ProcessState.valueOf("SUSPENDED_READY"));
+        assertEquals(ProcessState.SWAPPED_READY, ProcessState.valueOf("SWAPPED_READY"));
     }
 }
