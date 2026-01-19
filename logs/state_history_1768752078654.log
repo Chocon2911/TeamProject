@@ -1,0 +1,440 @@
+====================================================================================================
+OS KERNEL SIMULATOR - STATE HISTORY LOG
+Generated: 2026-01-18 23:01:18
+====================================================================================================
+
+
+----------------------------------------------------------------------------------------------------
+TICK 0: Cycle 1 - Process selected: Chrome
+----------------------------------------------------------------------------------------------------
+PID  | Name         | Priority | Remaining  | State           | In Memory 
+----------------------------------------------------------------------------------------------------
+1    | Chrome       | 2        | 10         | READY_MEMORY    | No        
+2    | VSCode       | 1        | 8          | READY_MEMORY    | No        
+3    | Spotify      | 3        | 6          | READY_MEMORY    | No        
+4    | Terminal     | 2        | 4          | READY_MEMORY    | No        
+5    | Calculator   | 4        | 2          | READY_MEMORY    | No        
+[Tick    1] Chrome      : READY_MEMORY    → KERNEL_RUNNING   (dispatch - context switch)
+[Tick    2] Chrome      : KERNEL_RUNNING  → USER_RUNNING     (return to user mode)
+[Tick    2] Chrome      : Executed 2ms, remaining 8ms
+[Tick    3] Chrome      : USER_RUNNING    → KERNEL_RUNNING   (timer interrupt)
+[Tick    4] Chrome      : KERNEL_RUNNING  → PREEMPTED        (preempted by scheduler)
+[Tick    5] Chrome      : PREEMPTED       → READY_MEMORY     (requeued to ready queue)
+
+----------------------------------------------------------------------------------------------------
+TICK 5: Cycle 1 completed
+----------------------------------------------------------------------------------------------------
+PID  | Name         | Priority | Remaining  | State           | In Memory 
+----------------------------------------------------------------------------------------------------
+1    | Chrome       | 2        | 8          | READY_MEMORY    | No        
+2    | VSCode       | 1        | 8          | READY_MEMORY    | No        
+3    | Spotify      | 3        | 6          | READY_MEMORY    | No        
+4    | Terminal     | 2        | 4          | READY_MEMORY    | No        
+5    | Calculator   | 4        | 2          | READY_MEMORY    | No        
+
+----------------------------------------------------------------------------------------------------
+TICK 5: Cycle 2 - Process selected: VSCode
+----------------------------------------------------------------------------------------------------
+PID  | Name         | Priority | Remaining  | State           | In Memory 
+----------------------------------------------------------------------------------------------------
+1    | Chrome       | 2        | 8          | READY_MEMORY    | No        
+2    | VSCode       | 1        | 8          | READY_MEMORY    | No        
+3    | Spotify      | 3        | 6          | READY_MEMORY    | No        
+4    | Terminal     | 2        | 4          | READY_MEMORY    | No        
+5    | Calculator   | 4        | 2          | READY_MEMORY    | No        
+[Tick    6] VSCode      : READY_MEMORY    → KERNEL_RUNNING   (dispatch - context switch)
+[Tick    7] VSCode      : KERNEL_RUNNING  → USER_RUNNING     (return to user mode)
+[Tick    7] VSCode      : Executed 2ms, remaining 6ms
+[Tick    8] VSCode      : USER_RUNNING    → KERNEL_RUNNING   (timer interrupt)
+[Tick    9] VSCode      : KERNEL_RUNNING  → PREEMPTED        (preempted by scheduler)
+[Tick   10] VSCode      : PREEMPTED       → READY_MEMORY     (requeued to ready queue)
+
+----------------------------------------------------------------------------------------------------
+TICK 10: Cycle 2 completed
+----------------------------------------------------------------------------------------------------
+PID  | Name         | Priority | Remaining  | State           | In Memory 
+----------------------------------------------------------------------------------------------------
+1    | Chrome       | 2        | 8          | READY_MEMORY    | No        
+2    | VSCode       | 1        | 6          | READY_MEMORY    | No        
+3    | Spotify      | 3        | 6          | READY_MEMORY    | No        
+4    | Terminal     | 2        | 4          | READY_MEMORY    | No        
+5    | Calculator   | 4        | 2          | READY_MEMORY    | No        
+
+----------------------------------------------------------------------------------------------------
+TICK 10: Cycle 3 - Process selected: Spotify
+----------------------------------------------------------------------------------------------------
+PID  | Name         | Priority | Remaining  | State           | In Memory 
+----------------------------------------------------------------------------------------------------
+1    | Chrome       | 2        | 8          | READY_MEMORY    | No        
+2    | VSCode       | 1        | 6          | READY_MEMORY    | No        
+3    | Spotify      | 3        | 6          | READY_MEMORY    | No        
+4    | Terminal     | 2        | 4          | READY_MEMORY    | No        
+5    | Calculator   | 4        | 2          | READY_MEMORY    | No        
+[Tick   11] Spotify     : READY_MEMORY    → KERNEL_RUNNING   (dispatch - context switch)
+[Tick   12] Spotify     : KERNEL_RUNNING  → USER_RUNNING     (return to user mode)
+[Tick   12] Spotify     : Executed 2ms, remaining 4ms
+[Tick   13] Spotify     : USER_RUNNING    → KERNEL_RUNNING   (timer interrupt)
+[Tick   14] Spotify     : KERNEL_RUNNING  → PREEMPTED        (preempted by scheduler)
+[Tick   15] Spotify     : PREEMPTED       → READY_MEMORY     (requeued to ready queue)
+
+----------------------------------------------------------------------------------------------------
+TICK 15: Cycle 3 completed
+----------------------------------------------------------------------------------------------------
+PID  | Name         | Priority | Remaining  | State           | In Memory 
+----------------------------------------------------------------------------------------------------
+1    | Chrome       | 2        | 8          | READY_MEMORY    | No        
+2    | VSCode       | 1        | 6          | READY_MEMORY    | No        
+3    | Spotify      | 3        | 4          | READY_MEMORY    | No        
+4    | Terminal     | 2        | 4          | READY_MEMORY    | No        
+5    | Calculator   | 4        | 2          | READY_MEMORY    | No        
+
+----------------------------------------------------------------------------------------------------
+TICK 15: Cycle 4 - Process selected: Terminal
+----------------------------------------------------------------------------------------------------
+PID  | Name         | Priority | Remaining  | State           | In Memory 
+----------------------------------------------------------------------------------------------------
+1    | Chrome       | 2        | 8          | READY_MEMORY    | No        
+2    | VSCode       | 1        | 6          | READY_MEMORY    | No        
+3    | Spotify      | 3        | 4          | READY_MEMORY    | No        
+4    | Terminal     | 2        | 4          | READY_MEMORY    | No        
+5    | Calculator   | 4        | 2          | READY_MEMORY    | No        
+[Tick   16] Terminal    : READY_MEMORY    → KERNEL_RUNNING   (dispatch - context switch)
+[Tick   17] Terminal    : KERNEL_RUNNING  → USER_RUNNING     (return to user mode)
+[Tick   17] Terminal    : Executed 2ms, remaining 2ms
+[Tick   18] Terminal    : USER_RUNNING    → KERNEL_RUNNING   (timer interrupt)
+[Tick   19] Terminal    : KERNEL_RUNNING  → PREEMPTED        (preempted by scheduler)
+[Tick   20] Terminal    : PREEMPTED       → READY_MEMORY     (requeued to ready queue)
+
+----------------------------------------------------------------------------------------------------
+TICK 20: Cycle 4 completed
+----------------------------------------------------------------------------------------------------
+PID  | Name         | Priority | Remaining  | State           | In Memory 
+----------------------------------------------------------------------------------------------------
+1    | Chrome       | 2        | 8          | READY_MEMORY    | No        
+2    | VSCode       | 1        | 6          | READY_MEMORY    | No        
+3    | Spotify      | 3        | 4          | READY_MEMORY    | No        
+4    | Terminal     | 2        | 2          | READY_MEMORY    | No        
+5    | Calculator   | 4        | 2          | READY_MEMORY    | No        
+
+----------------------------------------------------------------------------------------------------
+TICK 20: Cycle 5 - Process selected: Calculator
+----------------------------------------------------------------------------------------------------
+PID  | Name         | Priority | Remaining  | State           | In Memory 
+----------------------------------------------------------------------------------------------------
+1    | Chrome       | 2        | 8          | READY_MEMORY    | No        
+2    | VSCode       | 1        | 6          | READY_MEMORY    | No        
+3    | Spotify      | 3        | 4          | READY_MEMORY    | No        
+4    | Terminal     | 2        | 2          | READY_MEMORY    | No        
+5    | Calculator   | 4        | 2          | READY_MEMORY    | No        
+[Tick   21] Calculator  : READY_MEMORY    → KERNEL_RUNNING   (dispatch - context switch)
+[Tick   22] Calculator  : KERNEL_RUNNING  → USER_RUNNING     (return to user mode)
+[Tick   22] Calculator  : Executed 2ms, remaining 0ms
+[Tick   23] Calculator  : USER_RUNNING    → KERNEL_RUNNING   (exit() system call)
+[Tick   24] Calculator  : KERNEL_RUNNING  → ZOMBIE           (process terminated)
+
+----------------------------------------------------------------------------------------------------
+TICK 24: Cycle 5 completed
+----------------------------------------------------------------------------------------------------
+PID  | Name         | Priority | Remaining  | State           | In Memory 
+----------------------------------------------------------------------------------------------------
+1    | Chrome       | 2        | 8          | READY_MEMORY    | No        
+2    | VSCode       | 1        | 6          | READY_MEMORY    | No        
+3    | Spotify      | 3        | 4          | READY_MEMORY    | No        
+4    | Terminal     | 2        | 2          | READY_MEMORY    | No        
+5    | Calculator   | 4        | 0          | ZOMBIE          | No        
+
+----------------------------------------------------------------------------------------------------
+TICK 24: Cycle 6 - Process selected: Chrome
+----------------------------------------------------------------------------------------------------
+PID  | Name         | Priority | Remaining  | State           | In Memory 
+----------------------------------------------------------------------------------------------------
+1    | Chrome       | 2        | 8          | READY_MEMORY    | No        
+2    | VSCode       | 1        | 6          | READY_MEMORY    | No        
+3    | Spotify      | 3        | 4          | READY_MEMORY    | No        
+4    | Terminal     | 2        | 2          | READY_MEMORY    | No        
+5    | Calculator   | 4        | 0          | ZOMBIE          | No        
+[Tick   25] Chrome      : READY_MEMORY    → KERNEL_RUNNING   (dispatch - context switch)
+[Tick   26] Chrome      : KERNEL_RUNNING  → USER_RUNNING     (return to user mode)
+[Tick   26] Chrome      : Executed 2ms, remaining 6ms
+[Tick   27] Chrome      : USER_RUNNING    → KERNEL_RUNNING   (timer interrupt)
+[Tick   28] Chrome      : KERNEL_RUNNING  → PREEMPTED        (preempted by scheduler)
+[Tick   29] Chrome      : PREEMPTED       → READY_MEMORY     (requeued to ready queue)
+
+----------------------------------------------------------------------------------------------------
+TICK 29: Cycle 6 completed
+----------------------------------------------------------------------------------------------------
+PID  | Name         | Priority | Remaining  | State           | In Memory 
+----------------------------------------------------------------------------------------------------
+1    | Chrome       | 2        | 6          | READY_MEMORY    | No        
+2    | VSCode       | 1        | 6          | READY_MEMORY    | No        
+3    | Spotify      | 3        | 4          | READY_MEMORY    | No        
+4    | Terminal     | 2        | 2          | READY_MEMORY    | No        
+5    | Calculator   | 4        | 0          | ZOMBIE          | No        
+
+----------------------------------------------------------------------------------------------------
+TICK 29: Cycle 7 - Process selected: VSCode
+----------------------------------------------------------------------------------------------------
+PID  | Name         | Priority | Remaining  | State           | In Memory 
+----------------------------------------------------------------------------------------------------
+1    | Chrome       | 2        | 6          | READY_MEMORY    | No        
+2    | VSCode       | 1        | 6          | READY_MEMORY    | No        
+3    | Spotify      | 3        | 4          | READY_MEMORY    | No        
+4    | Terminal     | 2        | 2          | READY_MEMORY    | No        
+5    | Calculator   | 4        | 0          | ZOMBIE          | No        
+[Tick   30] VSCode      : READY_MEMORY    → KERNEL_RUNNING   (dispatch - context switch)
+[Tick   31] VSCode      : KERNEL_RUNNING  → USER_RUNNING     (return to user mode)
+[Tick   31] VSCode      : Executed 2ms, remaining 4ms
+[Tick   32] VSCode      : USER_RUNNING    → KERNEL_RUNNING   (timer interrupt)
+[Tick   33] VSCode      : KERNEL_RUNNING  → PREEMPTED        (preempted by scheduler)
+[Tick   34] VSCode      : PREEMPTED       → READY_MEMORY     (requeued to ready queue)
+
+----------------------------------------------------------------------------------------------------
+TICK 34: Cycle 7 completed
+----------------------------------------------------------------------------------------------------
+PID  | Name         | Priority | Remaining  | State           | In Memory 
+----------------------------------------------------------------------------------------------------
+1    | Chrome       | 2        | 6          | READY_MEMORY    | No        
+2    | VSCode       | 1        | 4          | READY_MEMORY    | No        
+3    | Spotify      | 3        | 4          | READY_MEMORY    | No        
+4    | Terminal     | 2        | 2          | READY_MEMORY    | No        
+5    | Calculator   | 4        | 0          | ZOMBIE          | No        
+
+----------------------------------------------------------------------------------------------------
+TICK 34: Cycle 8 - Process selected: Spotify
+----------------------------------------------------------------------------------------------------
+PID  | Name         | Priority | Remaining  | State           | In Memory 
+----------------------------------------------------------------------------------------------------
+1    | Chrome       | 2        | 6          | READY_MEMORY    | No        
+2    | VSCode       | 1        | 4          | READY_MEMORY    | No        
+3    | Spotify      | 3        | 4          | READY_MEMORY    | No        
+4    | Terminal     | 2        | 2          | READY_MEMORY    | No        
+5    | Calculator   | 4        | 0          | ZOMBIE          | No        
+[Tick   35] Spotify     : READY_MEMORY    → KERNEL_RUNNING   (dispatch - context switch)
+[Tick   36] Spotify     : KERNEL_RUNNING  → USER_RUNNING     (return to user mode)
+[Tick   36] Spotify     : Executed 2ms, remaining 2ms
+[Tick   37] Spotify     : USER_RUNNING    → KERNEL_RUNNING   (timer interrupt)
+[Tick   38] Spotify     : KERNEL_RUNNING  → PREEMPTED        (preempted by scheduler)
+[Tick   39] Spotify     : PREEMPTED       → READY_MEMORY     (requeued to ready queue)
+
+----------------------------------------------------------------------------------------------------
+TICK 39: Cycle 8 completed
+----------------------------------------------------------------------------------------------------
+PID  | Name         | Priority | Remaining  | State           | In Memory 
+----------------------------------------------------------------------------------------------------
+1    | Chrome       | 2        | 6          | READY_MEMORY    | No        
+2    | VSCode       | 1        | 4          | READY_MEMORY    | No        
+3    | Spotify      | 3        | 2          | READY_MEMORY    | No        
+4    | Terminal     | 2        | 2          | READY_MEMORY    | No        
+5    | Calculator   | 4        | 0          | ZOMBIE          | No        
+
+----------------------------------------------------------------------------------------------------
+TICK 39: Cycle 9 - Process selected: Terminal
+----------------------------------------------------------------------------------------------------
+PID  | Name         | Priority | Remaining  | State           | In Memory 
+----------------------------------------------------------------------------------------------------
+1    | Chrome       | 2        | 6          | READY_MEMORY    | No        
+2    | VSCode       | 1        | 4          | READY_MEMORY    | No        
+3    | Spotify      | 3        | 2          | READY_MEMORY    | No        
+4    | Terminal     | 2        | 2          | READY_MEMORY    | No        
+5    | Calculator   | 4        | 0          | ZOMBIE          | No        
+[Tick   40] Terminal    : READY_MEMORY    → KERNEL_RUNNING   (dispatch - context switch)
+[Tick   41] Terminal    : KERNEL_RUNNING  → USER_RUNNING     (return to user mode)
+[Tick   41] Terminal    : Executed 2ms, remaining 0ms
+[Tick   42] Terminal    : USER_RUNNING    → KERNEL_RUNNING   (exit() system call)
+[Tick   43] Terminal    : KERNEL_RUNNING  → ZOMBIE           (process terminated)
+
+----------------------------------------------------------------------------------------------------
+TICK 43: Cycle 9 completed
+----------------------------------------------------------------------------------------------------
+PID  | Name         | Priority | Remaining  | State           | In Memory 
+----------------------------------------------------------------------------------------------------
+1    | Chrome       | 2        | 6          | READY_MEMORY    | No        
+2    | VSCode       | 1        | 4          | READY_MEMORY    | No        
+3    | Spotify      | 3        | 2          | READY_MEMORY    | No        
+4    | Terminal     | 2        | 0          | ZOMBIE          | No        
+5    | Calculator   | 4        | 0          | ZOMBIE          | No        
+
+----------------------------------------------------------------------------------------------------
+TICK 43: Cycle 10 - Process selected: Chrome
+----------------------------------------------------------------------------------------------------
+PID  | Name         | Priority | Remaining  | State           | In Memory 
+----------------------------------------------------------------------------------------------------
+1    | Chrome       | 2        | 6          | READY_MEMORY    | No        
+2    | VSCode       | 1        | 4          | READY_MEMORY    | No        
+3    | Spotify      | 3        | 2          | READY_MEMORY    | No        
+4    | Terminal     | 2        | 0          | ZOMBIE          | No        
+5    | Calculator   | 4        | 0          | ZOMBIE          | No        
+[Tick   44] Chrome      : READY_MEMORY    → KERNEL_RUNNING   (dispatch - context switch)
+[Tick   45] Chrome      : KERNEL_RUNNING  → USER_RUNNING     (return to user mode)
+[Tick   45] Chrome      : Executed 2ms, remaining 4ms
+[Tick   46] Chrome      : USER_RUNNING    → KERNEL_RUNNING   (timer interrupt)
+[Tick   47] Chrome      : KERNEL_RUNNING  → PREEMPTED        (preempted by scheduler)
+[Tick   48] Chrome      : PREEMPTED       → READY_MEMORY     (requeued to ready queue)
+
+----------------------------------------------------------------------------------------------------
+TICK 48: Cycle 10 completed
+----------------------------------------------------------------------------------------------------
+PID  | Name         | Priority | Remaining  | State           | In Memory 
+----------------------------------------------------------------------------------------------------
+1    | Chrome       | 2        | 4          | READY_MEMORY    | No        
+2    | VSCode       | 1        | 4          | READY_MEMORY    | No        
+3    | Spotify      | 3        | 2          | READY_MEMORY    | No        
+4    | Terminal     | 2        | 0          | ZOMBIE          | No        
+5    | Calculator   | 4        | 0          | ZOMBIE          | No        
+
+----------------------------------------------------------------------------------------------------
+TICK 48: Cycle 11 - Process selected: VSCode
+----------------------------------------------------------------------------------------------------
+PID  | Name         | Priority | Remaining  | State           | In Memory 
+----------------------------------------------------------------------------------------------------
+1    | Chrome       | 2        | 4          | READY_MEMORY    | No        
+2    | VSCode       | 1        | 4          | READY_MEMORY    | No        
+3    | Spotify      | 3        | 2          | READY_MEMORY    | No        
+4    | Terminal     | 2        | 0          | ZOMBIE          | No        
+5    | Calculator   | 4        | 0          | ZOMBIE          | No        
+[Tick   49] VSCode      : READY_MEMORY    → KERNEL_RUNNING   (dispatch - context switch)
+[Tick   50] VSCode      : KERNEL_RUNNING  → USER_RUNNING     (return to user mode)
+[Tick   50] VSCode      : Executed 2ms, remaining 2ms
+[Tick   51] VSCode      : USER_RUNNING    → KERNEL_RUNNING   (timer interrupt)
+[Tick   52] VSCode      : KERNEL_RUNNING  → PREEMPTED        (preempted by scheduler)
+[Tick   53] VSCode      : PREEMPTED       → READY_MEMORY     (requeued to ready queue)
+
+----------------------------------------------------------------------------------------------------
+TICK 53: Cycle 11 completed
+----------------------------------------------------------------------------------------------------
+PID  | Name         | Priority | Remaining  | State           | In Memory 
+----------------------------------------------------------------------------------------------------
+1    | Chrome       | 2        | 4          | READY_MEMORY    | No        
+2    | VSCode       | 1        | 2          | READY_MEMORY    | No        
+3    | Spotify      | 3        | 2          | READY_MEMORY    | No        
+4    | Terminal     | 2        | 0          | ZOMBIE          | No        
+5    | Calculator   | 4        | 0          | ZOMBIE          | No        
+
+----------------------------------------------------------------------------------------------------
+TICK 53: Cycle 12 - Process selected: Spotify
+----------------------------------------------------------------------------------------------------
+PID  | Name         | Priority | Remaining  | State           | In Memory 
+----------------------------------------------------------------------------------------------------
+1    | Chrome       | 2        | 4          | READY_MEMORY    | No        
+2    | VSCode       | 1        | 2          | READY_MEMORY    | No        
+3    | Spotify      | 3        | 2          | READY_MEMORY    | No        
+4    | Terminal     | 2        | 0          | ZOMBIE          | No        
+5    | Calculator   | 4        | 0          | ZOMBIE          | No        
+[Tick   54] Spotify     : READY_MEMORY    → KERNEL_RUNNING   (dispatch - context switch)
+[Tick   55] Spotify     : KERNEL_RUNNING  → USER_RUNNING     (return to user mode)
+[Tick   55] Spotify     : Executed 2ms, remaining 0ms
+[Tick   56] Spotify     : USER_RUNNING    → KERNEL_RUNNING   (exit() system call)
+[Tick   57] Spotify     : KERNEL_RUNNING  → ZOMBIE           (process terminated)
+
+----------------------------------------------------------------------------------------------------
+TICK 57: Cycle 12 completed
+----------------------------------------------------------------------------------------------------
+PID  | Name         | Priority | Remaining  | State           | In Memory 
+----------------------------------------------------------------------------------------------------
+1    | Chrome       | 2        | 4          | READY_MEMORY    | No        
+2    | VSCode       | 1        | 2          | READY_MEMORY    | No        
+3    | Spotify      | 3        | 0          | ZOMBIE          | No        
+4    | Terminal     | 2        | 0          | ZOMBIE          | No        
+5    | Calculator   | 4        | 0          | ZOMBIE          | No        
+
+----------------------------------------------------------------------------------------------------
+TICK 57: Cycle 13 - Process selected: Chrome
+----------------------------------------------------------------------------------------------------
+PID  | Name         | Priority | Remaining  | State           | In Memory 
+----------------------------------------------------------------------------------------------------
+1    | Chrome       | 2        | 4          | READY_MEMORY    | No        
+2    | VSCode       | 1        | 2          | READY_MEMORY    | No        
+3    | Spotify      | 3        | 0          | ZOMBIE          | No        
+4    | Terminal     | 2        | 0          | ZOMBIE          | No        
+5    | Calculator   | 4        | 0          | ZOMBIE          | No        
+[Tick   58] Chrome      : READY_MEMORY    → KERNEL_RUNNING   (dispatch - context switch)
+[Tick   59] Chrome      : KERNEL_RUNNING  → USER_RUNNING     (return to user mode)
+[Tick   59] Chrome      : Executed 2ms, remaining 2ms
+[Tick   60] Chrome      : USER_RUNNING    → KERNEL_RUNNING   (timer interrupt)
+[Tick   61] Chrome      : KERNEL_RUNNING  → PREEMPTED        (preempted by scheduler)
+[Tick   62] Chrome      : PREEMPTED       → READY_MEMORY     (requeued to ready queue)
+
+----------------------------------------------------------------------------------------------------
+TICK 62: Cycle 13 completed
+----------------------------------------------------------------------------------------------------
+PID  | Name         | Priority | Remaining  | State           | In Memory 
+----------------------------------------------------------------------------------------------------
+1    | Chrome       | 2        | 2          | READY_MEMORY    | No        
+2    | VSCode       | 1        | 2          | READY_MEMORY    | No        
+3    | Spotify      | 3        | 0          | ZOMBIE          | No        
+4    | Terminal     | 2        | 0          | ZOMBIE          | No        
+5    | Calculator   | 4        | 0          | ZOMBIE          | No        
+
+----------------------------------------------------------------------------------------------------
+TICK 62: Cycle 14 - Process selected: VSCode
+----------------------------------------------------------------------------------------------------
+PID  | Name         | Priority | Remaining  | State           | In Memory 
+----------------------------------------------------------------------------------------------------
+1    | Chrome       | 2        | 2          | READY_MEMORY    | No        
+2    | VSCode       | 1        | 2          | READY_MEMORY    | No        
+3    | Spotify      | 3        | 0          | ZOMBIE          | No        
+4    | Terminal     | 2        | 0          | ZOMBIE          | No        
+5    | Calculator   | 4        | 0          | ZOMBIE          | No        
+[Tick   63] VSCode      : READY_MEMORY    → KERNEL_RUNNING   (dispatch - context switch)
+[Tick   64] VSCode      : KERNEL_RUNNING  → USER_RUNNING     (return to user mode)
+[Tick   64] VSCode      : Executed 2ms, remaining 0ms
+[Tick   65] VSCode      : USER_RUNNING    → KERNEL_RUNNING   (exit() system call)
+[Tick   66] VSCode      : KERNEL_RUNNING  → ZOMBIE           (process terminated)
+
+----------------------------------------------------------------------------------------------------
+TICK 66: Cycle 14 completed
+----------------------------------------------------------------------------------------------------
+PID  | Name         | Priority | Remaining  | State           | In Memory 
+----------------------------------------------------------------------------------------------------
+1    | Chrome       | 2        | 2          | READY_MEMORY    | No        
+2    | VSCode       | 1        | 0          | ZOMBIE          | No        
+3    | Spotify      | 3        | 0          | ZOMBIE          | No        
+4    | Terminal     | 2        | 0          | ZOMBIE          | No        
+5    | Calculator   | 4        | 0          | ZOMBIE          | No        
+
+----------------------------------------------------------------------------------------------------
+TICK 66: Cycle 15 - Process selected: Chrome
+----------------------------------------------------------------------------------------------------
+PID  | Name         | Priority | Remaining  | State           | In Memory 
+----------------------------------------------------------------------------------------------------
+1    | Chrome       | 2        | 2          | READY_MEMORY    | No        
+2    | VSCode       | 1        | 0          | ZOMBIE          | No        
+3    | Spotify      | 3        | 0          | ZOMBIE          | No        
+4    | Terminal     | 2        | 0          | ZOMBIE          | No        
+5    | Calculator   | 4        | 0          | ZOMBIE          | No        
+[Tick   67] Chrome      : READY_MEMORY    → KERNEL_RUNNING   (dispatch - context switch)
+[Tick   68] Chrome      : KERNEL_RUNNING  → USER_RUNNING     (return to user mode)
+[Tick   68] Chrome      : Executed 2ms, remaining 0ms
+[Tick   69] Chrome      : USER_RUNNING    → KERNEL_RUNNING   (exit() system call)
+[Tick   70] Chrome      : KERNEL_RUNNING  → ZOMBIE           (process terminated)
+
+----------------------------------------------------------------------------------------------------
+TICK 70: Cycle 15 completed
+----------------------------------------------------------------------------------------------------
+PID  | Name         | Priority | Remaining  | State           | In Memory 
+----------------------------------------------------------------------------------------------------
+1    | Chrome       | 2        | 0          | ZOMBIE          | No        
+2    | VSCode       | 1        | 0          | ZOMBIE          | No        
+3    | Spotify      | 3        | 0          | ZOMBIE          | No        
+4    | Terminal     | 2        | 0          | ZOMBIE          | No        
+5    | Calculator   | 4        | 0          | ZOMBIE          | No        
+
+====================================================================================================
+SIMULATION SUMMARY
+====================================================================================================
+Total Ticks: 70
+Total Cycles: 15
+Simulation Time: 16005ms
+Context Switches: 15
+
+PROCESS FINAL STATES:
+Name         | Priority | Burst(ms)  | State           | Turnaround  
+----------------------------------------------------------------------
+Chrome       | 2        | 10         | ZOMBIE          | 15884       ms
+VSCode       | 1        | 8          | ZOMBIE          | 14948       ms
+Spotify      | 3        | 6          | ZOMBIE          | 12865       ms
+Terminal     | 2        | 4          | ZOMBIE          | 9652        ms
+Calculator   | 4        | 2          | ZOMBIE          | 5370        ms
+----------------------------------------------------------------------
+Average Turnaround Time: 11743.80ms
+====================================================================================================
